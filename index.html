@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TransitLoop | Paperless Transit</title>
+<style>
+:root{--navy:#102a43;--blue:#2459cf;--teal:#07877d;--ink:#172b45;--muted:#66788f;--line:#e2e8f0;--bg:#f4f7fb;--white:#fff;--green:#087f5b;--red:#b42318;--shadow:0 12px 32px rgba(16,42,67,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+.top{background:linear-gradient(110deg,#0b1f36,#164a79 72%,#087e86);color:#fff;padding:18px 24px}.topin{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:18px}.brand{display:flex;gap:12px;align-items:center}.logo{width:44px;height:44px;border-radius:14px;background:#ffffff1e;display:grid;place-items:center;font-size:23px}.brand h1{margin:0;font-size:20px}.brand p{margin:2px 0 0;color:#d5e6f6;font-size:12px}.tagtop{border:1px solid #ffffff4a;background:#ffffff12;padding:7px 11px;border-radius:99px;font-size:11px;font-weight:700}
+.wrap{max-width:1200px;margin:26px auto;padding:0 20px 35px}.welcome{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:20px}.eyebrow{color:var(--blue);font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}.welcome h2{font-size:27px;letter-spacing:-.7px;margin:5px 0}.welcome p{margin:0;color:var(--muted)}.today{background:#fff;border:1px solid var(--line);padding:9px 12px;border-radius:11px;color:var(--muted);font-size:12px;white-space:nowrap}
+.notice{display:flex;gap:10px;background:#fff8e8;border:1px solid #f3d89b;border-radius:13px;padding:12px 14px;color:#76520a;margin-bottom:18px;font-size:12px}.notice strong{color:#6b4500}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px}.metric,.panel{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.metric{padding:16px}.mhead{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;align-items:center}.mico{width:32px;height:32px;border-radius:10px;background:#eef5ff;display:grid;place-items:center;font-size:16px}.metric strong{display:block;font-size:26px;letter-spacing:-.7px;margin:10px 0 3px}.metric small{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:minmax(300px,.88fr) minmax(0,1.55fr);gap:17px;align-items:start}.panel{overflow:hidden}.phead{padding:17px 19px;border-bottom:1px solid #edf1f6;display:flex;justify-content:space-between;align-items:center;gap:10px}.ptitle{display:flex;align-items:center;gap:10px}.picon{width:35px;height:35px;background:#eaf2ff;border-radius:11px;display:grid;place-items:center;font-size:18px}.phead h3{font-size:15px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:2px}.pill{background:#eff6ff;color:#2458a6;border-radius:99px;padding:5px 8px;font-size:10px;font-weight:800;white-space:nowrap}.pbody{padding:18px 19px}.field{margin-bottom:14px}.field label{display:block;font-size:12px;font-weight:750;color:#334155;margin-bottom:6px}.field select,.field input{width:100%;padding:11px 12px;border:1px solid #d5dfeb;border-radius:10px;background:#fff;color:#20344d;outline:none}.field select:focus,.field input:focus{border-color:#75a2f8;box-shadow:0 0 0 3px #dbeafe}.balance{background:linear-gradient(130deg,#eff7ff,#f7fbff);border:1px solid #cfe2ff;border-radius:14px;padding:14px;margin-bottom:18px}.balance .lbl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#527094;font-weight:800}.balance strong{display:block;font-size:29px;color:#113e7a;letter-spacing:-.8px;margin:3px 0 5px}.chip{display:inline-block;background:#dcfce7;color:#166534;border-radius:99px;padding:5px 8px;font-size:10px;font-weight:800}
+.journeybox{border:1px solid #d7e4f7;border-radius:13px;padding:13px;background:#f8fbff;margin:3px 0 15px}.routehint{font-size:11px;color:#6b7d93;margin-bottom:9px}.journeyline{display:flex;gap:9px;align-items:flex-start}.dotcol{width:15px;display:flex;align-items:center;flex-direction:column;padding-top:5px}.dot{width:9px;height:9px;border:2px solid #2563eb;border-radius:50%;background:#fff}.line{height:28px;border-left:2px dashed #b8c9e4}.journeystops{flex:1;display:grid;grid-template-columns:1fr;gap:10px}.journeystops select{width:100%;padding:10px 11px;border:1px solid #d5dfeb;border-radius:9px;background:#fff;color:#20344d}.journeystops label{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#72839a;font-weight:800;display:block;margin-bottom:4px}
+.fare{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 13px;border-radius:12px;background:#f3f7fd;border:1px dashed #c4d4e9;margin-bottom:14px}.fare span{font-size:12px;color:#5b6f87}.fare strong{font-size:23px;color:#123d76}.primary{width:100%;border:0;border-radius:10px;background:linear-gradient(100deg,#078d82,#087b8a);color:white;padding:12px 14px;font-weight:800;box-shadow:0 5px 12px #078d8228}.primary:disabled{opacity:.45;cursor:not-allowed}.msg{display:none;padding:10px 12px;border-radius:10px;margin-top:11px;font-size:12px}.msg.success{display:block;background:#eafaf2;color:#087443;border:1px solid #b9edcf}.msg.error{display:block;background:#fff0ef;color:#b42318;border:1px solid #ffd1ce}.fine{font-size:10px;color:#718096;line-height:1.5;margin:11px 0 0}
+.right{display:grid;gap:17px}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:510px}th{text-align:left;background:#f8fafc;color:#6b7c91;padding:11px 12px;font-size:10px;letter-spacing:.6px;text-transform:uppercase;border-bottom:1px solid var(--line)}td{padding:12px;border-bottom:1px solid #edf1f6;font-size:12px;white-space:nowrap}tr:last-child td{border-bottom:0}.status{font-size:10px;font-weight:800;border-radius:99px;padding:5px 8px}.ok{background:#dcfce7;color:#166534}.bad{background:#fee2e2;color:#991b1b}.actions{display:flex;gap:8px;padding-top:13px;flex-wrap:wrap}.secondary{background:#fff;border:1px solid var(--line);color:#28405d;border-radius:9px;padding:9px 12px;font-weight:750}.empty{text-align:center;padding:24px;color:#94a3b8}.inspect{display:flex;gap:8px}.inspect input{flex:1;min-width:0;border:1px solid #d5dfeb;border-radius:9px;padding:10px}.inspect button{border:0;border-radius:9px;background:#2459cf;color:white;font-weight:800;padding:0 12px}.result{font-size:12px;line-height:1.55;margin-top:11px}
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin-top:17px}.demandgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.demand{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.demand small{font-size:10px;color:#718096}.demand strong{display:block;font-size:22px;margin:5px 0 1px}.demand span{font-size:10px;color:#718096}.insight{background:#eff6ff;border:1px solid #d5e5ff;border-radius:10px;padding:10px;margin-top:10px;font-size:11px;line-height:1.5;color:#355783}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step{display:flex;gap:8px}.num{flex:none;width:25px;height:25px;border-radius:8px;background:#eaf2ff;color:#2459cf;font-weight:900;display:grid;place-items:center}.step strong{display:block;font-size:11px;margin:2px 0 4px}.step p{font-size:10px;color:var(--muted);margin:0;line-height:1.5}.footer{display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding:12px 2px;color:#7b8ba0;font-size:10px}
+@media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}.grid,.lower{grid-template-columns:1fr}.welcome{align-items:flex-start;flex-direction:column}.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.top{padding:14px}.wrap{padding:0 11px 25px;margin:18px auto}.brand h1{font-size:17px}.tagtop{display:none}.metrics{gap:8px}.metric{padding:12px}.metric strong{font-size:23px}.phead,.pbody{padding:14px}.demandgrid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin"><div class="brand"><div class="logo">🚌</div><div><h1>TransitLoop</h1><p>Paperless journeys. More inclusive cities.</p></div></div><span class="tagtop">Student software prototype</span></div></header>
+<main class="wrap">
+<section class="welcome"><div><div class="eyebrow">Transit operations workspace</div><h2>Good day. Ready to travel?</h2><p>Choose your stops, get an automatic fare and simulate a reusable-card journey.</p></div><div class="today" id="today">Demo workspace</div></section>
+<div class="notice">ⓘ <div><strong>Prototype environment.</strong> Cards, payments and passenger counts are simulated. This website does not process real money or connect to BMTC, NCMC or a live transport operator.</div></div>
+<section class="metrics">
+<div class="metric"><div class="mhead">Successful journeys <span class="mico">✓</span></div><strong id="metricTrips">0</strong><small>Completed demo transactions</small></div>
+<div class="metric"><div class="mhead">Demo fare collection <span class="mico">₹</span></div><strong id="metricCollection">₹0.00</strong><small>Successful fares only</small></div>
+<div class="metric"><div class="mhead">Paper tickets avoided <span class="mico">♻</span></div><strong id="metricPaper">0</strong><small>One per successful demo journey</small></div>
+<div class="metric"><div class="mhead">Payment declines <span class="mico">!</span></div><strong id="metricFailed">0</strong><small>Includes insufficient-balance attempts</small></div>
+</section>
+<section class="grid">
+<article class="panel"><div class="phead"><div class="ptitle"><div class="picon">💳</div><div><h3>Passenger ticket</h3><div class="sub">Select a card and your journey</div></div></div><span class="pill">CARD SIMULATION</span></div>
+<div class="pbody">
+<div class="field"><label for="cardSelect">Reusable travel card</label><select id="cardSelect"><option value="10245">Card •••• 10245</option><option value="10231">Card •••• 10231</option><option value="10288">Card •••• 10288</option></select></div>
+<div class="balance"><div class="lbl">Available card balance</div><strong id="balance">₹150.00</strong><span class="chip">● Reusable travel card</span></div>
+<div class="journeybox"><div class="routehint">Your journey · Select where you board and where you get off. The system chooses a matching demo service automatically.</div>
+<div class="journeyline"><div class="dotcol"><span class="dot"></span><span class="line"></span><span class="dot"></span></div><div class="journeystops">
+<div><label for="fromSelect">Boarding stop · From</label><select id="fromSelect"><option>Central Station</option><option>City Market</option><option>University</option></select></div>
+<div><label for="toSelect">Destination · To</label><select id="toSelect"><option>University</option><option>City Market</option><option>Central Station</option></select></div>
+</div></div></div>
+<div class="fare"><div><span>Calculated journey fare</span><div class="fine" style="margin:2px 0 0">Based on selected stops</div></div><strong id="fareDisplay">₹30.00</strong></div>
+<button class="primary" id="payBtn">Tap card & pay →</button><div id="paymentMessage" class="msg" role="status"></div>
+<p class="fine">No fare entry is allowed. The system determines the fare and matching sample route from the selected stops. Sample prices are illustrative, not official transport fares.</p>
+</div></article>
+<div class="right">
+<article class="panel"><div class="phead"><div class="ptitle"><div class="picon">📊</div><div><h3>Operations overview</h3><div class="sub">Transaction activity saved in this browser</div></div></div><span class="pill">LIVE DEMO</span></div><div class="pbody" style="padding-top:0"><div class="tablewrap"><table><thead><tr><th>Time</th><th>Card</th><th>Journey</th><th>Fare</th><th>Status</th></tr></thead><tbody id="transactions"></tbody></table></div><div class="actions"><button class="secondary" id="exportBtn">↓ Export CSV</button><button class="secondary" id="resetBtn">Reset demo data</button></div><p class="fine">Local browser demo only. Reset restores sample balances and clears transaction records.</p></div></article>
+<article class="panel"><div class="phead"><div class="ptitle"><div class="picon">🪪</div><div><h3>Journey inspection</h3><div class="sub">Check the latest successful journey for a card</div></div></div></div><div class="pbody"><div class="inspect"><input id="inspectCard" value="10245" aria-label="Card ID to inspect" placeholder="Enter card ID"><button id="inspectBtn">Check record</button></div><div id="inspectionResult" class="result">Enter a card number to check its successful journey history.</div></div></article>
+</div></section>
+<section class="lower">
+<article class="panel"><div class="phead"><div class="ptitle"><div class="picon">🕘</div><div><h3>Illustrative demand profile</h3><div class="sub">Example passenger counts by time window</div></div></div><span class="pill">SAMPLE DATA</span></div><div class="pbody"><div class="demandgrid"><div class="demand"><small>7–8 AM</small><strong>31</strong><span>sample passengers</span></div><div class="demand"><small>8–9 AM</small><strong>68</strong><span>sample passengers</span></div><div class="demand"><small>9–10 AM</small><strong>91</strong><span>sample passengers</span></div></div><div class="insight"><strong>Demo insight:</strong> the sample count peaks from 9–10 AM. These are illustrative figures, not live data or an AI prediction.</div></div></article>
+<article class="panel"><div class="phead"><div class="ptitle"><div class="picon">↗</div><div><h3>How the system works</h3><div class="sub">Paperless ticketing in four steps</div></div></div></div><div class="pbody"><div class="steps"><div class="step"><div class="num">1</div><div><strong>Choose stops</strong><p>Select boarding and destination.</p></div></div><div class="step"><div class="num">2</div><div><strong>Calculate fare</strong><p>System finds a matching sample route.</p></div></div><div class="step"><div class="num">3</div><div><strong>Validate balance</strong><p>Decline if funds are insufficient.</p></div></div><div class="step"><div class="num">4</div><div><strong>Inspect journey</strong><p>Check the saved successful record.</p></div></div></div></div></article>
+</section>
+<footer class="footer"><span>TransitLoop · Sustainable and inclusive public transport ticketing · Student project</span><span>Prototype only · No real payments or official transport integration</span></footer>
+</main>
+<script>
+const KEY='transitloop_v2';
+const initial={'10245':150,'10231':35,'10288':8};
+const stopNames=['Central Station','City Market','University'];
+// Illustrative fare matrix; in production this would come from the operator's official fare rules.
+const fares={
+ 'Central Station|City Market':15,
+ 'City Market|Central Station':15,
+ 'City Market|University':20,
+ 'University|City Market':20,
+ 'Central Station|University':30,
+ 'University|Central Station':30
+};
+const services={
+ 'Central Station|City Market':'Route 7',
+ 'City Market|Central Station':'Route 7',
+ 'City Market|University':'Route 12',
+ 'University|City Market':'Route 12',
+ 'Central Station|University':'Route 25',
+ 'University|Central Station':'Route 25'
+};
+let state=load();
+function load(){try{let x=JSON.parse(localStorage.getItem(KEY));if(x&&x.balances&&Array.isArray(x.transactions))return x}catch(e){}return{balances:{...initial},transactions:[]}}
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function cash(n){return '₹'+Number(n).toFixed(2)}
+function card(){return document.getElementById('cardSelect').value}
+function key(){return document.getElementById('fromSelect').value+'|'+document.getElementById('toSelect').value}
+function currentFare(){return fares[key()]??null}
+function journey(){return document.getElementById('fromSelect').value+' → '+document.getElementById('toSelect').value}
+function updateFare(){let fare=currentFare(),valid=key().split('|')[0]!==key().split('|')[1];document.getElementById('fareDisplay').textContent=valid&&fare!==null?cash(fare):'—';document.getElementById('payBtn').disabled=!valid||fare===null;renderBalance()}
+function renderBalance(){document.getElementById('balance').textContent=cash(state.balances[card()]??0)}
+function showMessage(text,type){let e=document.getElementById('paymentMessage');e.className='msg '+type;e.textContent=text}
+let paymentInProgress = false;
+let lastSuccessfulIntent = null;
+let lastSuccessfulAt = 0;
+function intentKey(){return [card(),document.getElementById('fromSelect').value,document.getElementById('toSelect').value].join('|')}
+function pay(){
+ // Synchronous lock prevents rapid repeat clicks from running the payment logic twice.
+ if(paymentInProgress) return;
+ const btn=document.getElementById('payBtn');
+ paymentInProgress=true;
+ btn.disabled=true;
+ btn.textContent='Processing payment…';
+ // Recompute fare at payment time; never trust a passenger-entered amount.
+ const from=document.getElementById('fromSelect').value,to=document.getElementById('toSelect').value,fare=fares[from+'|'+to];
+ if(from===to||fare===undefined){
+   showMessage('Please choose two different valid stops.','error');
+   paymentInProgress=false; updateFare(); btn.textContent='Tap card & pay →'; return;
+ }
+ const id=card(),balance=Number(state.balances[id]??0),intent=[id,from,to].join('|'),now=Date.now();
+ // Prevent accidental duplicate charge for the same card + journey within 30 seconds.
+ if(intent===lastSuccessfulIntent && now-lastSuccessfulAt<30000){
+   showMessage('This journey was just paid for. To avoid an accidental second charge, wait 30 seconds or change the card or journey before trying again.','error');
+   paymentInProgress=false; btn.textContent='Tap card & pay →'; updateFare(); return;
+ }
+ const ok=balance>=fare;
+ const rec={time:new Date().toLocaleTimeString(),card:id,from,to,journey:from+' → '+to,service:services[from+'|'+to],fare,status:ok?'SUCCESS':'FAILED'};
+ if(ok){
+   state.balances[id]=Number((balance-fare).toFixed(2));
+   lastSuccessfulIntent=intent; lastSuccessfulAt=now;
+ }
+ state.transactions.unshift(rec);state.transactions=state.transactions.slice(0,100);save();render();
+ showMessage(ok?'✓ Payment successful. '+rec.service+' · '+journey()+' · Remaining balance '+cash(state.balances[id])+'. This same journey is protected against accidental repeat payment for 30 seconds.':'✕ Insufficient balance. Fare is '+cash(fare)+' but this card has '+cash(balance)+'. No money was deducted.',''+(ok?'success':'error'));
+ // Keep a short processing lock, then restore the button for a deliberate new attempt.
+ window.setTimeout(()=>{paymentInProgress=false;updateFare();btn.textContent='Tap card & pay →';},800);
+}
+function render(){
+ renderBalance();
+ const tx=state.transactions;
+ document.getElementById('metricTrips').textContent=tx.filter(t=>t.status==='SUCCESS').length;
+ document.getElementById('metricCollection').textContent=cash(tx.filter(t=>t.status==='SUCCESS').reduce((a,t)=>a+t.fare,0));
+ document.getElementById('metricPaper').textContent=tx.filter(t=>t.status==='SUCCESS').length;
+ document.getElementById('metricFailed').textContent=tx.filter(t=>t.status==='FAILED').length;
+ const tbody=document.getElementById('transactions');
+ tbody.innerHTML=tx.length?tx.slice(0,8).map(t=>'<tr><td>'+esc(t.time)+'</td><td>'+esc(t.card)+'</td><td><strong>'+esc(t.service||'Demo service')+'</strong><br><span style="color:#718096">'+esc(t.journey)+'</span></td><td>'+cash(t.fare)+'</td><td><span class="status '+(t.status==='SUCCESS'?'ok':'bad')+'">'+t.status+'</span></td></tr>').join(''):'<tr><td colspan="5" class="empty">No transactions yet. Choose your stops to begin.</td></tr>';
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function inspect(){const id=document.getElementById('inspectCard').value.trim(),el=document.getElementById('inspectionResult');const found=state.transactions.find(t=>t.card===id&&t.status==='SUCCESS');if(found){el.innerHTML='<span style="color:#087443;font-weight:800">✓ Successful journey found</span><br>Card: '+esc(found.card)+'<br>Service: '+esc(found.service||'Demo service')+'<br>Journey: '+esc(found.journey)+'<br>Fare paid: '+cash(found.fare)+'<br>Time: '+esc(found.time)}else{el.innerHTML='<span style="color:#b42318;font-weight:800">No successful record found.</span> This demo check is not proof of fare evasion.'}}
+document.getElementById('payBtn').addEventListener('click',pay);
+document.getElementById('cardSelect').addEventListener('change',renderBalance);
+document.getElementById('fromSelect').addEventListener('change',()=>{if(document.getElementById('fromSelect').value===document.getElementById('toSelect').value){document.getElementById('toSelect').value=stopNames.find(s=>s!==document.getElementById('fromSelect').value)}updateFare()});
+document.getElementById('toSelect').addEventListener('change',updateFare);
+document.getElementById('inspectBtn').addEventListener('click',inspect);
+document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('Reset all local demo transactions and restore sample card balances?')){state={balances:{...initial},transactions:[]};save();render();document.getElementById('paymentMessage').className='msg';document.getElementById('inspectionResult').textContent='Demo data reset. Enter a card number to check journey history.'}});
+document.getElementById('exportBtn').addEventListener('click',()=>{const rows=[['Time','Card','Service','From','To','Fare','Status'],...state.transactions.map(t=>[t.time,t.card,t.service,t.from,t.to,t.fare,t.status])];const csv=rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='transitloop-transactions.csv';a.click();URL.revokeObjectURL(a.href)});
+document.getElementById('today').textContent='📅 '+new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+updateFare();render();
+</script>
+</body></html>
